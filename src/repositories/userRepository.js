@@ -5,4 +5,8 @@ export class UserRepository extends BaseRepository {
     constructor() {
         super(user);
     }
+
+    async findByEmail(email) {
+        return await this.model.findOne({ email });
+    }
 }

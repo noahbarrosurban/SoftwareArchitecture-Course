@@ -16,7 +16,7 @@ const UserController = {
 
     createUser: async (req, res) => {
         try {
-            const newUser = await userService.createUser(req.body);
+            const newUser = await userService.register(req.body);
             res.status(201).json({
                 message: "Usuário criado com sucesso",
                 element: new UserDTO(newUser),

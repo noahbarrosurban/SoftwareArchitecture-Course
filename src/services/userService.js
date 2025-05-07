@@ -1,15 +1,31 @@
+import bcrypt from "bcryptjs";
 import { UserRepository } from "../repositories/userRepository.js";
 import { UserDTO } from "../models/dtos/userDTO.js";
+
+const {hash} = bcrypt;
 
 export class UserService {
     constructor() {
         this.userRepository = new UserRepository();
     }
 
-    createUser = async (userData) => {
-        const user = UserDTO.fromRequest(userData);
-        return await this.userRepository.create(user);
-    };
+    register = async (userData) => {
+        const userExists = await this.userRepository.findByEmail(userData.email);
+
+        if (userExists) {
+            throw new Error("Usuário já cadastrado!");
+        }
+
+        const passwordHash = await hash(userData.password, 8);
+        const userToCreate = {
+            name: userData.name,
+            email: userData.email,
+            password: passwordHash
+        };
+
+        const createdUser = await this.userRepository.create(userToCreate);
+        return new UserDTO(createdUser);
+    }
 
     getAllUsers = async () => {
         return await this.userRepository.findAll();
