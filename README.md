@@ -59,6 +59,7 @@ Este é um projeto backend desenvolvido em **Node.js** com o framework **Express
     - O backend estará disponível em [localhost:8080](http://localhost:8080).  
 
 3. **Acesse a API**  
+    - Acesse o [Swagger](http://localhost:8080/api-docs/#/) para conferir a documentação da API.
     - Utilize ferramentas como **Postman** ou **Insomnia** para testar os endpoints da API.  
 
 ---
