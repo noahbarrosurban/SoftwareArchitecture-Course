@@ -1,8 +1,12 @@
 import express from "express";
-import UserController from "../controllers/userController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
+import {createUserController} from "../controllers/userController.js";
+import {UserService} from "../services/userService.js";
 
 const routes = express.Router();
+
+const userService = new UserService();
+const UserController = createUserController(userService);
 
 /**
  * @swagger
