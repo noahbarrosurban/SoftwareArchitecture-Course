@@ -1,0 +1,28 @@
+name: Pipeline
+
+on:
+  push:
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Run unit tests
+      run: npm run test
+    
+    - name: Test results
+      if: always()
+      run: echo "Tests completed!"
